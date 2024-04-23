@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Age Calculator</title>
+    </head>
+    <body class="grid place-items-center bg-background text-primary">
+        <div
+            id="app"
+            style="display: none"
+            class="my-20 min-h-60 w-[86%] bg-card relative max-w-96 rounded border hidden flex-col items-stretch justify-center cursor-default"
+        >
+            <div
+                id="settings"
+                class="absolute right-0 top-0 translate-y-[-100%] py-2"
+            >
+                <button
+                    class="button-hollow aspect-square h-10 bg-primary hover:bg-primary/80"
+                    id="accent-btn"
+                    title="Change Accent"
+                ></button>
+                <button
+                    class="button-hollow aspect-square h-10 bg-background"
+                    id="theme-btn"
+                    title="Change Theme"
+                ></button>
+            </div>
+            <div
+                class="p-4 flex flex-row gap-2 items-center justify-center md:justify-start"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                    class="h-8 aspect-square text-primary fill-current"
+                >
+                    <path
+                        d="M20.586 23.414l-6.586-6.586v-8.828h4v7.172l5.414 5.414zM16 0c-8.837 0-16 7.163-16 16s7.163 16 16 16 16-7.163 16-16-7.163-16-16-16zM16 28c-6.627 0-12-5.373-12-12s5.373-12 12-12c6.627 0 12 5.373 12 12s-5.373 12-12 12z"
+                    ></path>
+                </svg>
+                <h1 class="font-bold text-3xl sm:text-4xl">Age Calculator</h1>
+            </div>
+            <div class="p-4 flex flex-col items-stretch justify-center gap-4">
+                <div
+                    class="flex flex-col sm:flex-row gap-2 items-start sm:items-center justify-start"
+                >
+                    <span class="text-base whitespace-nowrap sm:min-w-28"
+                        >Date of Birth</span
+                    >
+                    <div id="slot-dob"></div>
+                </div>
+                <div
+                    class="flex flex-col sm:flex-row gap-2 items-start sm:items-center justify-start"
+                >
+                    <span class="text-base whitespace-nowrap sm:min-w-28"
+                        >Find Age on</span
+                    >
+                    <div id="slot-findOnDate"></div>
+                </div>
+                <div class="flex flex-row gap-2 items-center justify-center">
+                    <button class="px-4 py-2 w-full button" id="btn-calc">
+                        Calculate
+                    </button>
+                    <button class="px-4 py-2 w-full button" id="btn-reset">
+                        Reset
+                    </button>
+                </div>
+                <div id="displayArea"></div>
+            </div>
+        </div>
+        <script type="module" src="/main.js"></script>
+    </body>
+</html>
