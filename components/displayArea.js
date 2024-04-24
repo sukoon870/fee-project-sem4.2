@@ -5,7 +5,7 @@ const displayArea = (date1, date2) => {
         throw new Error("Invalid args.");
     const timeDiff = Math.max(date1, date2) - Math.min(date1, date2);
     console.log(timeDiff);
-    let text1 = "Your are";
+    let text1 = "You are";
     if (date1 > date2 || date2 < new Date(new Date().toJSON().split("T")[0]))
         text1 = "You were";
     else if (date2 > new Date()) text1 = "You will be";
