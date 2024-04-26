@@ -29,8 +29,6 @@ const dateInput = (key) => {
                 <span class="text-muted pointer-events-none w-0">/</span>
                 <input
                     type="number"
-                    min="1970"
-                    max="3000"
                     id="input-birthDate-yyyy-${key}"
                     placeholder="YYYY"
                     class="w-22 sm:w-20 p-1.5 ring-offset-card focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 ring-inset focus-visible:outline-none rounded-r text-center transition-colors bg-transparent hover:bg-input placeholder:text-muted"

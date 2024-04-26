@@ -92,6 +92,24 @@ const handleCompareBtn = () => {
         }
     });
 };
+const handleNumInputs = () => {
+    const fn = (elem) => {
+        if (elem instanceof HTMLInputElement && elem.type === "number") {
+            elem.addEventListener("input", (e) => {
+                const min = parseInt(elem.getAttribute("min")) || 1;
+                const max = parseInt(elem.getAttribute("max")) || null;
+                console.log(min, max);
+                let value = elem.valueAsNumber;
+                if (!value) value = min;
+                if (value < min) value = min;
+                if (max && value > max) value = max;
+
+                elem.value = value.toFixed();
+            });
+        }
+    };
+    for (const elemQry in inputs) fn(qs(inputs[elemQry]));
+};
 const handlePickerBtn = () => {
     const fn = (key) => {
         if (!key) throw new Error("really?");
@@ -232,6 +250,7 @@ const handleListeners = () => {
     handleThemeBtn();
     handleAccentBtn();
     handleCompareBtn();
+    handleNumInputs();
     handleHiddenDatePicker();
     handlePickerBtn();
     handleCalcBtn();
