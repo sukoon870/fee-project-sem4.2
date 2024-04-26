@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "slnt" 0;
 }
 *,
 *::after,
@@ -231,10 +234,10 @@ body {
         @apply text-primary-foreground bg-primary;
     }
     .button {
-        @apply px-2 py-1.5 ring-offset-card rounded border focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 text-primary-foreground bg-primary hover:bg-primary/60 active:bg-primary transition-colors;
+        @apply cursor-pointer px-2 py-1.5 ring-offset-card rounded border focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 text-primary-foreground bg-primary hover:bg-primary/60 active:bg-primary transition-colors;
     }
     .button-hollow {
-        @apply px-2 py-1.5 ring-offset-card rounded border focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 text-secondary-foreground bg-transparent hover:bg-secondary/60 active:bg-secondary transition-colors;
+        @apply cursor-pointer px-2 py-1.5 ring-offset-card rounded border focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 text-secondary-foreground bg-transparent hover:bg-secondary/60 active:bg-secondary transition-colors;
     }
     input[type="number"] {
         &::-webkit-inner-spin-button {
@@ -242,11 +245,11 @@ body {
         }
     }
     #displayArea {
-        transition: 0.2s max-height ease-out;
+        transition: 0.5s max-height ease-out;
         overflow: hidden;
         max-height: 0;
         &.show {
-            max-height: 500px;
+            max-height: 1000px;
         }
     }
 }

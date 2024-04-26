@@ -8,6 +8,10 @@ const inputs = {
     dobMM: "#input-birthDate-mm-dob",
     dobYYYY: "#input-birthDate-yyyy-dob",
     dobRealDate: "#input-birthDate-real-dob",
+    dob2DD: "#input-birthDate-dd-dob2",
+    dob2MM: "#input-birthDate-mm-dob2",
+    dob2YYYY: "#input-birthDate-yyyy-dob2",
+    dob2RealDate: "#input-birthDate-real-dob2",
     //
     findOnDateDD: "#input-birthDate-dd-findOnDate",
     findOnDateMM: "#input-birthDate-mm-findOnDate",
@@ -23,7 +27,8 @@ const accents = [
 ];
 const qs = (selector) => {
     const elem = document.querySelector(selector);
-    if (!elem) window.alert("something went wrong in html");
+    if (!elem)
+        console.error("something went wrong in html. Cant find ", selector);
     return elem;
 };
 
@@ -73,6 +78,20 @@ const handleAccentBtn = () => {
         setAccent(1);
     });
 };
+const handleCompareBtn = () => {
+    const input = qs("#input-birthDate-compare");
+    input.addEventListener("change", (e) => {
+        const checked = e.currentTarget.checked;
+        const dob2 = qs("#slot-dob2").parentElement;
+        if (checked) {
+            dob2.classList.remove("hidden");
+            dob2.classList.add("flex");
+        } else {
+            dob2.classList.add("hidden");
+            dob2.classList.remove("flex");
+        }
+    });
+};
 const handlePickerBtn = () => {
     const fn = (key) => {
         if (!key) throw new Error("really?");
@@ -83,6 +102,7 @@ const handlePickerBtn = () => {
         });
     };
     fn("dob");
+    fn("dob2");
     fn("findOnDate");
 };
 const handleHiddenDatePicker = () => {
@@ -109,6 +129,7 @@ const handleHiddenDatePicker = () => {
         });
     };
     fn("dob");
+    fn("dob2");
     fn("findOnDate");
 };
 const handleCalcBtn = () => {
@@ -123,7 +144,17 @@ const handleCalcBtn = () => {
                 qs(inputs[`dobDD`]).value,
             ].join("-")
         );
-        const date2 = new Date(
+        const compare = qs("#input-birthDate-compare").checked;
+        const date2 = compare
+            ? new Date(
+                  [
+                      qs(inputs[`dob2YYYY`]).value,
+                      qs(inputs[`dob2MM`]).value,
+                      qs(inputs[`dob2DD`]).value,
+                  ].join("-")
+              )
+            : null;
+        const date3 = new Date(
             [
                 qs(inputs[`findOnDateYYYY`]).value,
                 qs(inputs[`findOnDateMM`]).value,
@@ -132,16 +163,21 @@ const handleCalcBtn = () => {
         );
         const displayElem = qs("#displayArea");
         displayElem.classList.remove("show");
-        console.log(date1, date2);
         const fn = () => {
-            if (isNaN(date1) || isNaN(date2)) {
+            if (isNaN(date1) || isNaN(date3) || (compare && isNaN(date2))) {
                 displayElem.innerHTML = html`<p class="text-red-500 italic">
-                    Both dates need to be filled and be valid.
+                    All dates need to be filled and be valid.
                 </p>`;
             } else {
-                displayElem.innerHTML = displayArea(date1, date2);
+                displayElem.innerHTML = displayArea(date1, date2, date3);
             }
             displayElem.classList.add("show");
+            setTimeout(() => {
+                displayElem.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            }, 300);
         };
         // if (document.startViewTransition) {
         //     const transition = document.startViewTransition(fn);
@@ -176,12 +212,14 @@ const handleResetBtn = () => {
     });
 };
 
-const attachElements = () => {
+const attachInputs = () => {
     const slotDOB = qs("#slot-dob");
-    slotDOB.outerHTML = dateInput("dob");
+    slotDOB.innerHTML = dateInput("dob");
+    const slotDOB2 = qs("#slot-dob2");
+    slotDOB2.innerHTML = dateInput("dob2");
 
     const slotFindOnDate = qs("#slot-findOnDate");
-    slotFindOnDate.outerHTML = dateInput("findOnDate");
+    slotFindOnDate.innerHTML = dateInput("findOnDate");
     const date = new Date();
     qs(inputs.findOnDateDD).value = date.getDate().toString().padStart(2, 0);
     qs(inputs.findOnDateMM).value = (date.getMonth() + 1)
@@ -193,6 +231,7 @@ const attachElements = () => {
 const handleListeners = () => {
     handleThemeBtn();
     handleAccentBtn();
+    handleCompareBtn();
     handleHiddenDatePicker();
     handlePickerBtn();
     handleCalcBtn();
@@ -204,7 +243,7 @@ const init = () => {
     qs("#app").style.display = "flex";
     setTheme();
     setAccent();
-    attachElements();
+    attachInputs();
     handleListeners();
 };
 

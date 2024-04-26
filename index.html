@@ -4,16 +4,19 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Age Calculator</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+        </style>
     </head>
     <body class="grid place-items-center bg-background text-primary">
         <div
             id="app"
             style="display: none"
-            class="my-20 min-h-60 w-[86%] bg-card relative max-w-96 rounded border hidden flex-col items-stretch justify-center cursor-default"
+            class="select-none my-20 min-h-60 w-[86%] bg-card relative max-w-96 rounded border hidden flex-col items-stretch justify-center cursor-default"
         >
             <div
                 id="settings"
-                class="absolute right-0 top-0 translate-y-[-100%] py-2"
+                class="absolute right-0 top-0 translate-y-[-100%] py-2 grid grid-flow-col gap-2"
             >
                 <button
                     class="button-hollow aspect-square h-10 bg-primary hover:bg-primary/80"
@@ -25,6 +28,25 @@
                     id="theme-btn"
                     title="Change Theme"
                 ></button>
+                <label
+                    title="Compare"
+                    class="button-hollow aspect-square h-10 cursor-pointer ring-offset-card rounded border focus-within:ring-ring focus-within:ring-2 focus-within:ring-offset-2 text-secondary-foreground bg-transparent hover:bg-secondary/60 active:bg-secondary transition-colors"
+                >
+                    <input
+                        type="checkbox"
+                        class="peer/compare w-0 h-0 absolute pointer-events-none"
+                        id="input-birthDate-compare"
+                    />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        class="h-full aspect-square fill-primary opacity-10 peer-checked/compare:opacity-100 transition-opacity"
+                    >
+                        <path
+                            d="M15 12.984l-3.984-3.984 3.984-3.984v3h6.984v1.969h-6.984v3zM9 14.016v-3l3.984 3.984-3.984 3.984v-3h-6.984v-1.969h6.984z"
+                        ></path>
+                    </svg>
+                </label>
             </div>
             <div
                 class="p-4 flex flex-row gap-2 items-center justify-center md:justify-start"
@@ -47,7 +69,15 @@
                     <span class="text-base whitespace-nowrap sm:min-w-28"
                         >Date of Birth</span
                     >
-                    <div id="slot-dob"></div>
+                    <div id="slot-dob" class="w-full"></div>
+                </div>
+                <div
+                    class="hidden flex-col sm:flex-row gap-2 items-start sm:items-center justify-start"
+                >
+                    <span class="text-base whitespace-nowrap sm:min-w-28"
+                        >Date of Birth 2
+                    </span>
+                    <div id="slot-dob2" class="w-full"></div>
                 </div>
                 <div
                     class="flex flex-col sm:flex-row gap-2 items-start sm:items-center justify-start"
@@ -55,9 +85,9 @@
                     <span class="text-base whitespace-nowrap sm:min-w-28"
                         >Find Age on</span
                     >
-                    <div id="slot-findOnDate"></div>
+                    <div id="slot-findOnDate" class="w-full"></div>
                 </div>
-                <div class="flex flex-row gap-2 items-center justify-center">
+                <div class="grid grid-cols-2 gap-2 place-items-center">
                     <button class="px-4 py-2 w-full button" id="btn-calc">
                         Calculate
                     </button>
@@ -65,7 +95,7 @@
                         Reset
                     </button>
                 </div>
-                <div id="displayArea"></div>
+                <div id="displayArea" class="select-text"></div>
             </div>
         </div>
         <script type="module" src="./main.js"></script>
