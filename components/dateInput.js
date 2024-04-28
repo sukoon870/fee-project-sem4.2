@@ -11,7 +11,6 @@ const dateInput = (key) => {
             >
                 <input
                     type="number"
-                    min="1"
                     max="31"
                     id="input-birthDate-dd-${key}"
                     placeholder="DD"
@@ -20,7 +19,6 @@ const dateInput = (key) => {
                 <span class="text-muted pointer-events-none w-0">/</span>
                 <input
                     type="number"
-                    min="1"
                     max="12"
                     id="input-birthDate-mm-${key}"
                     placeholder="MM"

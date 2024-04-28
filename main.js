@@ -95,16 +95,28 @@ const handleCompareBtn = () => {
 const handleNumInputs = () => {
     const fn = (elem) => {
         if (elem instanceof HTMLInputElement && elem.type === "number") {
-            elem.addEventListener("input", (e) => {
-                const min = parseInt(elem.getAttribute("min")) || 1;
+            elem.addEventListener("focus", () => {
+                elem.select();
+            });
+            elem.addEventListener("input", () => {
+                const min = parseInt(elem.getAttribute("min")) || 0;
                 const max = parseInt(elem.getAttribute("max")) || null;
-                console.log(min, max);
                 let value = elem.valueAsNumber;
                 if (!value) value = min;
                 if (value < min) value = min;
                 if (max && value > max) value = max;
 
                 elem.value = value.toFixed();
+                if (elem.value.length > 1)
+                    if (elem.id.includes("-dd-")) {
+                        document
+                            .getElementById(elem.id.replace("-dd-", "-mm-"))
+                            ?.focus();
+                    } else if (elem.id.includes("-mm-")) {
+                        document
+                            .getElementById(elem.id.replace("-mm-", "-yyyy-"))
+                            ?.focus();
+                    }
             });
         }
     };
