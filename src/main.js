@@ -1,7 +1,7 @@
-import dateInput from "./components/dateInput";
-import displayArea from "./components/displayArea";
+import dateInput from "../components/dateInput";
+import displayArea from "../components/displayArea";
 import "./style.css";
-import { html } from "./utils";
+import { html } from "../utils";
 
 const inputs = {
     dobDD: "#input-birthDate-dd-dob",
